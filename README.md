@@ -20,11 +20,11 @@ Figuring out how to parse the mess that is `.pcap` is beyond me.
 ### tail standard mongo logs
 ```bash
 # mongo shell
-> db.setLogLevel([1-5] [,component])
+> db.setLogLevel([0-5] [,component])
 # tail the logs
-$ tail -f /usr/local/var/log/mongodb/mongo.log [ | grep command | notify.sh ]
+$ tail -f /usr/local/var/log/mongodb/mongo.log | ./tail-to-alert/parser.js # or pipe to grep cmd | notify.sh
 ```
-The default logLevel is 0 and only logs access control. [setLogLevel](https://docs.mongodb.com/manual/reference/method/db.setLogLevel/) > 1 increases the chatty-ness. Still some work to parse it all.
+The default logLevel is 0 and only logs access control. [setLogLevel](https://docs.mongodb.com/manual/reference/method/db.setLogLevel/) > 1 increases the chatty-ness. Still some work to parse it all. The components `query` and `write` looks promising.
 
 ### hook into mongoose debug
 ```js
